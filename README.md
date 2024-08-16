@@ -74,7 +74,7 @@ memory usage: 1.6+ MB
 <h3>Conclusion:</h3>
 <p>Using the Random Forest model, we can more accurately identify customers at risk of churning. This allows us to target retention efforts more effectively and reduce unnecessary interventions for customers who are not at risk.</p>
 
-<h3>Additional Analysis</h3>
+<h3><a href="https://github.com/jvontama96/BankAttritionPrediction_And_FeatureImportance/tree/main/Bank_Result_and_FeatureImportance">Result Analysis</a></h3>
 <ul>
   <li>ROC Curves</li>
   <li>Feature Importance: Model Agnostic Methods</li>

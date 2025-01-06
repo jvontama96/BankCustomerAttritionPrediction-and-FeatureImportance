@@ -116,7 +116,7 @@ It can be concluded that users may use the platform for either short-term financ
 <h3>Data Processing <a href="https://github.com/jvontama96/AirlinesCustomerClustering_RFM_KMeans/blob/main/Customer_Airlines_Clustering_KMeans_RFM.ipynb">(Check Full Project Documentation)</a></p></h3>
   <ul>
   <li>Encoding</li>
-  <li>Data Splitting (Target Feature: 'Attrition Flag')</li>
+  <li>Data Splitting (<strong>Target Feature: 'Attrition Flag', 0: Churn, 1: not churn</strong>)</li>
   <li>Feature Selection</li>
   <li>Outlier Handling</li>
   </ul>
@@ -131,7 +131,7 @@ It can be concluded that users may use the platform for either short-term financ
       <img
   src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/RF_training.JPG?raw=true" alt="age3" style="width:60%; max-width:450px;">
   </ul>
-  <li>Model Evaluation</li>
+  <h3>Model Evaluation</h3>
   <ul>
     <li>Confusion Matrix</li>
     <ul>
@@ -148,32 +148,125 @@ It can be concluded that users may use the platform for either short-term financ
     <li>Classification Report</li>
       <img
   src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/Model_evaluation_AttritionCust.JPG?raw=true" alt="age3" style="width:60%; max-width:450px;">
-  </ul>
-</ul>
-
 <h3>Best Model - Random Forest:</h3>
 <ul>
-  <li><strong>Highest Precision (0.85):</strong> The Random Forest model has the highest precision for predicting churn. This means that 85% of the customers it predicts as likely to churn do indeed churn. This high precision reduces the risk of false positives (i.e., incorrectly predicting that a customer will churn).</li>
-  <li><strong>Trade-off with Recall (0.46):</strong> While the recall is lower, meaning it misses some customers who do churn, our primary focus is precision. This trade-off is acceptable given our objective to minimize false alarms.</li>
+  <li>
+    <strong>Highest Precision (0.85):</strong> The Random Forest model has the highest precision for predicting churn. This means that 85% of the customers it predicts as likely to churn do indeed churn. This high precision reduces the risk of false positives (i.e., incorrectly predicting that a customer will churn).
+  </li>
+  <li>
+    <strong>Trade-off with Recall (0.46):</strong> While the recall is lower, meaning it misses some customers who do churn, our primary focus is precision. This trade-off is acceptable given our objective to minimize false alarms.
+  </li>
 </ul>
-
-<p>Conclusion:<p>
-<p>Using the Random Forest model, we can more accurately identify customers at risk of churning. This allows us to target retention efforts more effectively and reduce unnecessary interventions for customers who are not at risk.</p>
-</ul>
-
-
-<h3><a href="https://github.com/jvontama96/BankAttritionPrediction_And_FeatureImportance/tree/main/Bank_Result_and_FeatureImportance">Result Analysis</a></h3>
-<ul>
-  <li>ROC Curves</li>
-  <li>Feature Importance: Model Agnostic Methods</li>
-  <li>Dependence Plot:</li>
+<p>
+  <strong>Conclusion:</strong> Using the Random Forest model, we can more accurately identify customers at risk of churning. This allows us to target retention efforts more effectively and reduce unnecessary interventions for customers who are not at risk.
+</p>
+    
+<li>Model ROC Curves Analysis</li>
+ <ul>
+    <li>1. ROC Decision Tree</li>
+ <img
+  src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/ROC_DT.png?raw=true" alt="age3" style="width:60%; max-width:450px;"> 
+    <li>2. ROC KNN</li>
+    <img
+  src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/ROC_KNN.png?raw=true" alt="age3" style="width:60%; max-width:450px;">
+   <li>3. ROC Random Forest</li>
+    <img
+  src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/ROC_RF.png?raw=true" alt="age3" style="width:60%; max-width:450px;">
+   <p>Based on all the model ROC Curves, we can identify that all the ROC curve lines (represented in blue) are above the random classifier line (black dotted line). This means that all the models are better at predicting class 0 (churn class customer) compared to predicting it without a model (only by reading data trends, relationships with certain features, etc.).</p>
+ </ul>
+ </ul>
+ 
+<h2>Feature Importance: Model Agnostic Methods</h2>
+  <p>The best model is Random Forest. Because Random Forest is not an inherently interpretable model, we will focus on analyzing feature importance using Model Agnostic Methods.</p>
   <ul>
-    <li>Based on the dependence plot observation, we can see the impact of the <code>contacts_count_12_months</code> feature. It indicates that customers who interact 2-3 times within the last 12 months are more likely to churn. Additionally, customers who have more than 3 interactions are even more likely to churn.</li>
-    <li>We can recommend several actions based on this insight:</li>
-    <ul>
-      <li>Observe the products and features on the online platform that most customers use in 2-3 interactions. Evaluate the UX and optimize features to make the platform more user-friendly, especially for older or less tech-savvy customers.</li>
-      <li>Utilize the interactions to provide proactive customer support and assistance. Identify pain points or issues that customers may face and address them promptly to enhance customer satisfaction.</li>
-      <li>Use insights from customer interactions to offer personalized incentives or rewards. This could include targeted discounts on services, exclusive offers for loyal customers, or benefits that align with their tier of financial needs.</li>
+  <h3>1. Drop-out Loss</h3>
+       <img
+  src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/Dropout_Loss.png?raw=true" alt="age3" style="width:100%; max-width:600px;">
+    <h3>Insights from the Feature Importance (Dropout Loss Plot):</h3>
+<h4>Key Features:</h4>
+<ul>
+  <li><strong>Total Transaction Amount (total_trans_amt):</strong> The most critical feature influencing customer attrition, with the highest drop-out loss (+0.094). This suggests that customers with low transaction amounts are more likely to churn.</li>
+  <li><strong>Total Revolving Balance (total_revolving_bal):</strong> The second most important feature (+0.061), indicating that customers with high revolving balances may exhibit attrition tendencies.</li>
+  <li><strong>Change in Total Transactions (total_ct_chng_q4_q1):</strong> An important feature (+0.042), highlighting that a decline in transaction activity between quarters signals potential churn.</li>
+  <li><strong>Total Relationship Count (total_relationship_count):</strong> Customers with fewer products or accounts tied to the bank (+0.034) are at a higher risk of attrition.</li>
+</ul>
+<h4>Supporting Features:</h4>
+<ul>
+  <li><strong>Change in Total Amount (total_amt_chng_q4_q1):</strong> Indicates variations in spending habits, possibly hinting at disengagement.</li>
+  <li><strong>Contact Frequency (contacts_count_12_mon):</strong> Customers contacted frequently may be high-risk or less engaged.</li>
+  <li><strong>Credit Limit and Months of Inactivity:</strong> Lower credit limits and extended inactivity periods correlate with potential churn but have a smaller impact.</li>
+</ul>
+<h3>Business Recommendations to Prevent Churn:</h3>
+<ul>
+<li>Boost Engagement with Low-Transaction Customers:
+
+- Introduce transaction-based rewards programs (e.g., cashback or discounts) to encourage higher spending.
+- Provide personalized financial tools to guide customers on maximizing account benefits.</li>
+
+<li>Manage High Revolving Balances:
+
+- Offer interest rate reductions or balance consolidation plans to alleviate financial pressure.
+- Launch credit management webinars to educate customers on sustainable usage.</li>
+
+<li>Proactively Address Declining Activity:
+
+- Implement early-warning systems to detect drops in transactions and initiate targeted re-engagement campaigns.
+- Provide time-limited offers (e.g., discounts or loyalty points) to stimulate renewed activity.</li>
+
+<li>Enhance Customer Relationships:
+
+- Encourage adoption of additional products (e.g., savings accounts, loans) through personalized cross-selling.
+- Assign dedicated account managers to high-risk customers to build trust and engagement.</li>
+
+<li>Optimize Communication Strategies:
+
+- Use data-driven insights to tailor outreach frequency and content, ensuring relevance and avoiding over-contacting.
+- Leverage customer feedback to align services with their needs, improving satisfaction and loyalty.</li>
+</ul>
+
+ <h3>2. Partial Dependence Plot</h3>
+  <img
+  src="https://github.com/jvontama96/BankCustomerAttritionPrediction-and-FeatureImportance/blob/main/ModelEvaluation_and_FeatureImportance/Partial_ Dependence_Plot.png?raw=true" alt="age3" style="width:100%; max-width:600px;">
+  <ul>
+<h3>Insights from Partial Dependence Plot (Features Impacting Churn Prediction):</h3>
+<h4>Key Features:</h4>
+<ul>
+  <li><strong>Total Transaction Amount (total_trans_amt):</strong> Churn probability significantly decreases as the total transaction amount increases. Customers with lower spending levels are more likely to churn.</li>
+  <li><strong>Total Revolving Balance (total_revolving_bal):</strong> Customers with high revolving balances exhibit a higher likelihood of churn, indicating financial stress or dissatisfaction with credit-related features.</li>
+  <li><strong>Total Relationship Count (total_relationship_count):</strong> Customers with fewer relationships (fewer products or services) tied to the bank are more likely to churn.</li>
+  <li><strong>Months of Inactivity (months_inactive_12_mon):</strong> Churn probability increases with a higher number of inactive months.</li>
+  <li><strong>Change in Total Transactions (total_ct_chng_q4_q1):</strong> A decline in transaction activity between quarters correlates with a higher churn probability.</li>
+</ul>
+<h3> Business Recommendations</h3>
+<h4>Personalized Engagement Strategies</h4>
+<ul>
+    <li><strong>Customer Segmentation:</strong> Segment customers based on key churn indicators such as low transactions or high inactivity.</li>
+    <li><strong>Tailored Communication Plans:</strong> Develop customized communication strategies to re-engage at-risk customers, emphasizing personalized rewards and offers.</li>
+</ul>
+
+<h4>Proactive Monitoring and Alerts</h4>
+<ul>
+    <li><strong>Predictive Analysis:</strong> Use predictive models to identify customers with declining activity or high financial stress.</li>
+    <li><strong>Real-time Alerts:</strong> Send proactive notifications about available offers, financial tips, or product recommendations.</li>
+</ul>
+
+<h4>Product Diversification and Bundling</h4>
+<ul>
+    <li><strong>Cross-Selling and Up-Selling:</strong> Encourage customers to explore additional banking services by offering discounts or rewards for multi-product usage.</li>
+    <li><strong>Bundle Offers:</strong> Focus on building deeper customer relationships by promoting bundled financial solutions.</li>
+</ul>
+
+<h4>Targeted Financial Support</h4>
+<ul>
+    <li><strong>Personalized Financial Assistance:</strong> Offer customized credit solutions or consultations for customers with high revolving balances or financial stress.</li>
+    <li><strong>Financial Health Programs:</strong> Build loyalty by showing concern for customers' financial well-being through programs or features focused on improving their financial health.</li>
+</ul>
+
+<h4>Incentives for Reactivation and Retention</h4>
+<ul>
+    <li><strong>Exclusive Incentives:</strong> Offer exclusive incentives for customers who re-engage after periods of inactivity.</li>
+    <li><strong>Loyalty Programs:</strong> Launch loyalty programs tied to transaction volume to ensure ongoing engagement and customer satisfaction.</li>
+</ul>
     </ul>
   </ul>
 </ul>
